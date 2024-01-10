@@ -1,11 +1,7 @@
 #!/bin/bash
 
-MONGODB1=mongo1
-MONGODB2=mongo2
-MONGODB3=mongo3
-
 echo SETUP.sh time now: `date +"%T" `
-mongosh --host ${MONGODB1}:27017 <<EOF
+mongosh --host mongo1:27017 <<EOF
 var cfg = {
     "_id": "rs0",
     "protocolVersion": 1,
@@ -13,17 +9,17 @@ var cfg = {
     "members": [
         {
             "_id": 0,
-            "host": "${MONGODB1}:27017",
+            "host": "mongo1:27017",
             "priority": 2
         },
         {
             "_id": 1,
-            "host": "${MONGODB2}:27018",
+            "host": "mongo2:27018",
             "priority": 0
         },
         {
             "_id": 2,
-            "host": "${MONGODB3}:27019",
+            "host": "mongo3:27019",
             "priority": 0
         }
     ],settings: {chainingAllowed: true}
