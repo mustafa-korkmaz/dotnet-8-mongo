@@ -12,7 +12,7 @@ namespace Infrastructure.Persistence.MongoDb
             BsonClassMap.RegisterClassMap<Order>(map =>
             {
                 map.AutoMap();
-            //    map.MapProperty(x => x.Items);
+                //    map.MapProperty(x => x.Items);
                 map.SetIgnoreExtraElements(true);
             });
 
@@ -20,7 +20,8 @@ namespace Infrastructure.Persistence.MongoDb
             {
                 map.AutoMap();
                 map.MapMember(x => x.ProductId)
-                .SetSerializer(new StringSerializer(BsonType.ObjectId));
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId))
+                    .SetIsRequired(true);
             });
         }
     }
