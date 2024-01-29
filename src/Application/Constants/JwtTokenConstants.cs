@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Application.Constants
@@ -15,16 +14,5 @@ namespace Application.Constants
         public static string Issuer => "mustafakorkmaz";
 
         public static string Audience => "Audience";
-
-        private static string GetCryptoSecurityKey()
-        {
-            var securityKey = "!_*a_quite_long_pass_phrase_goes_here*_!";  //use key vault here
-
-            using (var md5 = MD5.Create())
-            {
-                var result = md5.ComputeHash(Encoding.ASCII.GetBytes(securityKey));
-                return Encoding.ASCII.GetString(result);
-            }
-        }
     }
 }

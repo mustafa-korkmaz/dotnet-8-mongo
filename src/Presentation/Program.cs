@@ -4,6 +4,7 @@ using Presentation.Middlewares;
 using Presentation;
 using Microsoft.OpenApi.Models;
 using Infrastructure.Persistence.MongoDb;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,8 +50,13 @@ builder.Services.AddConfigSections(builder.Configuration);
 
 builder.Services.AddMappings();
 
+builder.Services.AddSingleton<IMongoClient>(s =>
+    new MongoClient(builder.Configuration["MongoDbConfig:ConnectionString"])
+);
+
 builder.Services.AddScoped<IMongoContext, MongoContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddApplicationServices();
 
 builder.Services.AddCors(config =>

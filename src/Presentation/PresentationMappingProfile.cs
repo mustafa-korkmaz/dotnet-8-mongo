@@ -4,6 +4,7 @@ using Application.Dto.Product;
 using Application.Dto.User;
 using AutoMapper;
 using Infrastructure.Services;
+using MongoDB.Bson;
 using Presentation.ViewModels;
 using Presentation.ViewModels.Identity;
 using Presentation.ViewModels.Order;
@@ -16,12 +17,14 @@ namespace Presentation
         public PresentationMappingProfile()
         {
             CreateMap<AddUserViewModel, UserDto>()
+                .ForMember(dest => dest.Id, opt =>
+                    opt.MapFrom(source => ObjectId.GenerateNewId().ToString()))
                 .ForMember(dest => dest.Username, opt =>
                     opt.MapFrom(source => source.Email!.GetNormalized()))
                 .ForMember(dest => dest.Email, opt =>
                     opt.MapFrom(source => source.Email!.GetNormalized()))
                 .ForMember(dest => dest.CreatedAt, opt =>
-                    opt.MapFrom(source => DateTimeOffset.UtcNow));
+                    opt.MapFrom(source => DateTime.UtcNow));
 
             CreateMap<GetTokenViewModel, UserDto>()
                 .ForMember(dest => dest.Username, opt =>
@@ -33,7 +36,7 @@ namespace Presentation
 
             CreateMap<AddEditProductViewModel, ProductDto>()
                 .ForMember(dest => dest.CreatedAt, opt =>
-                    opt.MapFrom(source => DateTimeOffset.UtcNow));
+                    opt.MapFrom(source => DateTime.UtcNow));
 
             CreateMap<ProductDto, ProductViewModel>();
 
@@ -42,7 +45,7 @@ namespace Presentation
 
             CreateMap<AddEditOrderViewModel, OrderDto>()
                 .ForMember(dest => dest.CreatedAt, opt =>
-                    opt.MapFrom(source => DateTimeOffset.UtcNow));
+                    opt.MapFrom(source => DateTime.UtcNow));
 
             CreateMap<AddEditOrderItemViewModel, OrderItemDto>();
             CreateMap<OrderDto, OrderViewModel>()

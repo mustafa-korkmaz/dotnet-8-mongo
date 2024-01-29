@@ -86,6 +86,10 @@ namespace Application.Services.Account
             var user = _mapper.Map<User>(userDto);
 
             user.SetPasswordHash(HashPassword(password));
+
+            await Repository.InsertOneAsync(user);
+
+            userDto.Id = user.Id;
         }
 
         private string HashPassword(string password)

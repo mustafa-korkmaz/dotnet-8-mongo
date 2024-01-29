@@ -2,7 +2,6 @@
 using Infrastructure.Persistence.MongoDb;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Text.Json;
 
 namespace Infrastructure.Repositories
 {
