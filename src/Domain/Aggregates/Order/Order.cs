@@ -5,8 +5,6 @@ namespace Domain.Aggregates.Order
     {
         public string UserId { get; private set; }
 
-        public User.User? User { get; private set; }
-
         public decimal Price => Items.Sum(x => x.GetPrice());
 
         private ICollection<OrderItem> _items;

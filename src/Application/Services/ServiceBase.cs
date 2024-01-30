@@ -48,15 +48,13 @@ namespace Application.Services
             return Mapper.Map<ListDocumentResponse<TDocument>, ListDtoResponse<TDto>>(resp);
         }
 
-        public virtual Task AddAsync(TDto dto)
+        public virtual async Task AddAsync(TDto dto)
         {
             var document = Mapper.Map<TDto, TDocument>(dto);
-
-            //set new members
+            
+            await Repository.InsertOneAsync(document);
+            
             dto.Id = document.Id;
-            dto.CreatedAt = document.CreatedAt;
-
-            return Repository.InsertOneAsync(document);
         }
 
         public virtual async Task UpdateAsync(TDto dto)

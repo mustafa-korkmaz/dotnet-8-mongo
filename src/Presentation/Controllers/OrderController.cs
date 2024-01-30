@@ -40,9 +40,9 @@ namespace Presentation.Controllers
         [ModelStateValidation]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(OrderViewModel), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Get([FromRoute] string id)
+        public async Task<IActionResult> Get([FromRoute] ObjectIdViewModel idModel)
         {
-            var orderDto = await _orderService.GetByIdAsync(id);
+            var orderDto = await _orderService.GetByIdAsync(idModel.id!);
 
             if (orderDto == null)
             {
@@ -73,11 +73,12 @@ namespace Presentation.Controllers
         [ModelStateValidation]
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Put([FromRoute] string id, [FromBody] AddEditOrderViewModel model)
+        public async Task<IActionResult> Put([FromRoute] ObjectIdViewModel idModel,
+            [FromBody] AddEditOrderViewModel model)
         {
             var orderDto = _mapper.Map<OrderDto>(model);
 
-            orderDto.Id = id;
+            orderDto.Id = idModel.id!;
             orderDto.UserId = GetUserId();
 
             await _orderService.UpdateAsync(orderDto);
@@ -88,9 +89,9 @@ namespace Presentation.Controllers
         [ModelStateValidation]
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Delete([FromRoute] string id)
+        public async Task<IActionResult> Delete([FromRoute] ObjectIdViewModel idModel)
         {
-            await _orderService.DeleteByIdAsync(id);
+            await _orderService.DeleteByIdAsync(idModel.id!);
 
             return NoContent();
         }

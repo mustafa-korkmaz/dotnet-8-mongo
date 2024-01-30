@@ -11,8 +11,6 @@ namespace Infrastructure.Persistence.MongoDb
             {
                 map.AutoMap();
                 map.SetIgnoreExtraElements(true);
-                map.MapMember(x => x.Sku).SetIsRequired(true);
-                map.MapMember(x => x.Name).SetIsRequired(true);
             });
         }
     }

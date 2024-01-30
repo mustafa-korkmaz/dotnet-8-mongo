@@ -1,14 +1,13 @@
-﻿
-namespace Presentation.ViewModels.Order
+﻿namespace Presentation.ViewModels.Order
 {
     public class OrderViewModel : ViewModelBase
     {
-        public IReadOnlyCollection<OrderItemViewModel> OrderItems { get; set; } = null!;
+        public IReadOnlyCollection<OrderItemViewModel> Items { get; set; } = null!;
     }
 
     public class OrderItemViewModel
     {
-        public long ProductId { get; set; }
+        public string ProductId { get; set; } = null!;
 
         public decimal UnitPrice { get; set; }
 

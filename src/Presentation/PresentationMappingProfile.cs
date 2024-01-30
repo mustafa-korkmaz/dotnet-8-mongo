@@ -17,8 +17,6 @@ namespace Presentation
         public PresentationMappingProfile()
         {
             CreateMap<AddUserViewModel, UserDto>()
-                .ForMember(dest => dest.Id, opt =>
-                    opt.MapFrom(source => ObjectId.GenerateNewId().ToString()))
                 .ForMember(dest => dest.Username, opt =>
                     opt.MapFrom(source => source.Email!.GetNormalized()))
                 .ForMember(dest => dest.Email, opt =>
@@ -48,9 +46,7 @@ namespace Presentation
                     opt.MapFrom(source => DateTime.UtcNow));
 
             CreateMap<AddEditOrderItemViewModel, OrderItemDto>();
-            CreateMap<OrderDto, OrderViewModel>()
-                .ForMember(dest => dest.OrderItems, opt =>
-                    opt.MapFrom(source => source.Items));
+            CreateMap<OrderDto, OrderViewModel>();
             CreateMap<OrderItemDto, OrderItemViewModel>();
         }
     }

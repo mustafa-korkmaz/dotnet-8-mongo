@@ -1,7 +1,7 @@
-﻿
-using Domain.Aggregates;
+﻿using Domain.Aggregates;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 
 namespace Infrastructure.Persistence.MongoDb
@@ -13,13 +13,17 @@ namespace Infrastructure.Persistence.MongoDb
             BsonClassMap.RegisterClassMap<Document>(x =>
             {
                 x.AutoMap();
-                x.MapIdMember(x => x.Id)
-                .SetSerializer(new StringSerializer(BsonType.ObjectId));
+                x.MapIdMember(document => document.Id)
+                    .SetIdGenerator(StringObjectIdGenerator.Instance)
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId));
             });
 
             ProductMapping.Configure();
-
             OrderMapping.Configure();
+            
+            // Set representation to Decimal128 for decimal types
+            BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
+            BsonSerializer.RegisterSerializer(typeof(decimal?), new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
         }
     }
 }

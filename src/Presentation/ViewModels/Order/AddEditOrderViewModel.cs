@@ -13,10 +13,10 @@ namespace Presentation.ViewModels.Order
 
     public class AddEditOrderItemViewModel
     {
-        [LongValidation]
+        [ObjectIdValidation]
         [Required(ErrorMessage = ValidationErrorCode.RequiredField)]
         [Display(Name = "PRODUCT_ID")]
-        public long? ProductId { get; set; }
+        public string? ProductId { get; set; }
 
         [Required(ErrorMessage = ValidationErrorCode.RequiredField)]
         [Display(Name = "UNIT_PRICE")]
