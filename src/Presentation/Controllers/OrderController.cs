@@ -1,4 +1,3 @@
-using Application.Dto.Order;
 using Application.Services.Order;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +5,8 @@ using Presentation.Middlewares.Validations;
 using Presentation.ViewModels;
 using Presentation.ViewModels.Order;
 using System.Net;
-using Application.Dto;
+using Application.Dtos;
+using Application.Dtos.Order;
 
 namespace Presentation.Controllers
 {

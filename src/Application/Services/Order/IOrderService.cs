@@ -1,5 +1,5 @@
 ﻿
-using Application.Dto.Order;
+using Application.Dtos.Order;
 
 namespace Application.Services.Order
 {

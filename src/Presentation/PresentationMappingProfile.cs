@@ -1,7 +1,7 @@
-﻿using Application.Dto;
-using Application.Dto.Order;
-using Application.Dto.Product;
-using Application.Dto.User;
+﻿using Application.Dtos;
+using Application.Dtos.Order;
+using Application.Dtos.Product;
+using Application.Dtos.User;
 using AutoMapper;
 using Infrastructure.Services;
 using MongoDB.Bson;

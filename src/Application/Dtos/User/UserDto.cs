@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Dto.User
+namespace Application.Dtos.User
 {
     public class UserDto : DtoBase
     {

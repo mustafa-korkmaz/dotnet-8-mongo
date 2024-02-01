@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Presentation.Middlewares.Validations;
 using Presentation.ViewModels.Identity;
 using System.Net;
-using Application.Dto.User;
+using Application.Dtos.User;
 
 namespace Presentation.Controllers
 {

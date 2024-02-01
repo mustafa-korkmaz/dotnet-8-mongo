@@ -1,9 +1,9 @@
-﻿using Application.Dto;
-using Domain.Aggregates;
+﻿using Domain.Aggregates;
 using Infrastructure.UnitOfWork;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Application.Constants;
+using Application.Dtos;
 using Application.Exceptions;
 using Infrastructure.Repositories;
 

@@ -1,5 +1,4 @@
-﻿
-using Application.Dto.Product;
+﻿using Application.Dtos.Product;
 using AutoMapper;
 using Infrastructure.Repositories;
 using Infrastructure.UnitOfWork;

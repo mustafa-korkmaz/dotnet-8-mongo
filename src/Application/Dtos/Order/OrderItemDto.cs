@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Dto.Order
+namespace Application.Dtos.Order
 {
     public class OrderItemDto
     {

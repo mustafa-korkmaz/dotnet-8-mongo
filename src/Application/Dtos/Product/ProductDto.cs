@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Dto.Product
+namespace Application.Dtos.Product
 {
     public class ProductDto : DtoBase
     {

@@ -1,5 +1,5 @@
 ﻿
-using Application.Dto.User;
+using Application.Dtos.User;
 
 namespace Application.Services.Account
 {

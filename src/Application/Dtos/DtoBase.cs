@@ -1,4 +1,4 @@
-﻿namespace Application.Dto
+﻿namespace Application.Dtos
 {
     public abstract class DtoBase
     {

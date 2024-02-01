@@ -11,7 +11,7 @@ namespace Presentation.ViewModels.Identity
         [Display(Name = "EMAIL")]
         public string? Email { get; set; }
 
-        //[StringLength(100, ErrorMessage = ValidationErrorCode.BetweenLength, MinimumLength = 4)]
+        [StringLength(100, ErrorMessage = ValidationErrorCode.BetweenLength, MinimumLength = 4)]
         [Display(Name = "NAME_SURNAME")]
         public string? NameSurname { get; set; }
 

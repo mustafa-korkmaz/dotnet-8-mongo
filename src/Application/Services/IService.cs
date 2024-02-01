@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dtos;
 
 namespace Application.Services
 {

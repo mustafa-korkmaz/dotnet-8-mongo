@@ -1,4 +1,3 @@
-using Application.Dto.Product;
 using Application.Services.Product;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +5,8 @@ using Presentation.Middlewares.Validations;
 using Presentation.ViewModels;
 using Presentation.ViewModels.Product;
 using System.Net;
-using Application.Dto;
+using Application.Dtos;
+using Application.Dtos.Product;
 
 namespace Presentation.Controllers
 {

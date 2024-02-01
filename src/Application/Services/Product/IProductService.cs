@@ -1,5 +1,5 @@
 ﻿
-using Application.Dto.Product;
+using Application.Dtos.Product;
 
 namespace Application.Services.Product
 {
