@@ -1,30 +1,14 @@
 ﻿namespace Application.Dtos
 {
-    public abstract class DtoBase
+    public abstract record DtoBase
     {
-        public string Id { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
+        public string? Id { get; set; }
+        
+        public DateTime CreatedAt { get; init; }
     }
 
-    public class ListDtoResponse<TDto> where TDto : DtoBase
-    {
-        /// <summary>
-        /// Paged list items
-        /// </summary>
-        public IReadOnlyCollection<TDto> Items { get; set; } = new List<TDto>();
+    public readonly record struct ListDtoResponse<TDto>(IReadOnlyCollection<TDto> Items, long RecordsTotal)
+        where TDto : DtoBase;
 
-        /// <summary>
-        /// Total count of items stored in repository
-        /// </summary>
-        public long RecordsTotal { get; set; }
-    }
-
-    public class ListDtoRequest
-    {
-        public bool IncludeRecordsTotal { get; set; }
-
-        public int Offset { get; set; }
-
-        public int Limit { get; set; }
-    }
+    public readonly record struct ListDtoRequest(bool IncludeRecordsTotal, int Offset, int Limit);
 }

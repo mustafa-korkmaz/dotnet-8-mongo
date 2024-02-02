@@ -1,12 +1,5 @@
 ﻿
 namespace Application.Dtos.Order
 {
-    public class OrderItemDto
-    {
-        public string ProductId { get; set; } = null!;
-
-        public decimal UnitPrice { get; set; }
-
-        public int Quantity { get; set; }
-    }
+    public readonly record struct OrderItemDto(string ProductId, decimal UnitPrice, int Quantity);
 }

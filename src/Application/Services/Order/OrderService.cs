@@ -51,8 +51,6 @@ namespace Application.Services.Order
                 }
 
                 await Repository.InsertOneAsync(document);
-
-                dto.Id = document.Id;
             });
         }
     }

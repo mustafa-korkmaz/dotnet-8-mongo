@@ -7,6 +7,7 @@ using Domain.Aggregates;
 using Domain.Aggregates.Order;
 using Domain.Aggregates.Product;
 using Domain.Aggregates.User;
+using MongoDB.Bson;
 
 namespace Application
 {
@@ -16,17 +17,38 @@ namespace Application
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>()
-                .ConvertUsing(src => new User(src.Id, src.Username, src.Email, src.NameSurname, src.IsEmailConfirmed, src.CreatedAt));
+                .ConvertUsing((src, _) =>
+                {
+                    if (src.Id == null)
+                    {
+                        src.Id = ObjectId.GenerateNewId().ToString();
+                    }
 
+                    return new User(src.Id, src.Username, src.Email, src.NameSurname, src.IsEmailConfirmed,
+                        src.CreatedAt);
+                });
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDto, Product>()
-                .ConvertUsing(src => new Product(src.Id, src.Sku, src.Name, src.UnitPrice, src.StockQuantity, src.CreatedAt));
+                .ConvertUsing((src, _) =>
+                {
+                    if (src.Id == null)
+                    {
+                        src.Id = ObjectId.GenerateNewId().ToString();
+                    }
+
+                    return new Product(src.Id, src.Sku, src.Name, src.UnitPrice, src.StockQuantity, src.CreatedAt);
+                });
 
             CreateMap<OrderItem, OrderItemDto>();
             CreateMap<Order, OrderDto>();
             CreateMap<OrderDto, Order>()
                 .ConvertUsing((src, _) =>
                 {
+                    if (src.Id == null)
+                    {
+                        src.Id = ObjectId.GenerateNewId().ToString();
+                    }
+
                     var order = new Order(src.Id, src.UserId, src.CreatedAt);
 
                     foreach (var item in src.Items)
