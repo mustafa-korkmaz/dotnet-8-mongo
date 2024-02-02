@@ -19,21 +19,13 @@ namespace Infrastructure.Persistence.MongoDb
                     .SetSerializer(new StringSerializer(BsonType.ObjectId));
             });
 
+            UserMapping.Configure();
             ProductMapping.Configure();
             OrderMapping.Configure();
             
             // Set representation to Decimal128 for decimal types
             BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
             BsonSerializer.RegisterSerializer(typeof(decimal?), new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
-
-            // Ignore null values
-            ConventionRegistry.Register("Ignore",
-                new ConventionPack
-                {
-                    new IgnoreIfNullConvention(true)
-                },
-                t => true);
-
         }
     }
 }

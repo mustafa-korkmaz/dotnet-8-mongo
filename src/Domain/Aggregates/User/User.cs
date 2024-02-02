@@ -17,12 +17,12 @@
         public IReadOnlyCollection<string>? Claims
         {
             get => _claims?.ToList();
-            
+
             // mongo deserialization requires a setter
             private set => _claims = value == null ? new List<string>() : value.ToList();
         }
 
-        public User(string id, string username, string email,bool isEmailConfirmed,
+        public User(string id, string username, string email, bool isEmailConfirmed,
             DateTime createdAt) : base(id, createdAt)
         {
             Username = username;

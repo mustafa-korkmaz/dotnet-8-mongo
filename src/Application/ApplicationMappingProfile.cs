@@ -21,8 +21,7 @@ namespace Application
                 {
                     src.Id ??= ObjectId.GenerateNewId().ToString();
 
-                    var user = new User(src.Id!, src.Username, src.Email, src.IsEmailConfirmed,
-                        src.CreatedAt);
+                    var user = new User(src.Id!, src.Username, src.Email, src.IsEmailConfirmed, src.CreatedAt);
 
                     user.SetNameSurname(src.NameSurname);
 
