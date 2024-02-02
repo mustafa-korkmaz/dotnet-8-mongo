@@ -4,7 +4,6 @@ using Application.Dtos.Product;
 using Application.Dtos.User;
 using AutoMapper;
 using Infrastructure.Services;
-using MongoDB.Bson;
 using Presentation.ViewModels;
 using Presentation.ViewModels.Identity;
 using Presentation.ViewModels.Order;
@@ -17,24 +16,18 @@ namespace Presentation
         public PresentationMappingProfile()
         {
             CreateMap<AddUserViewModel, UserDto>()
-                .ForMember(dest => dest.Username, opt =>
-                    opt.MapFrom(source => source.Email!.GetNormalized()))
-                .ForMember(dest => dest.Email, opt =>
-                    opt.MapFrom(source => source.Email!.GetNormalized()))
-                .ForMember(dest => dest.CreatedAt, opt =>
-                    opt.MapFrom(source => DateTime.UtcNow));
+                .ConvertUsing((src, _) =>
+                    new UserDto(src.Email!.GetNormalized(), src.Email!.GetNormalized(), src.NameSurname, false, null, DateTime.UtcNow));
 
             CreateMap<GetTokenViewModel, UserDto>()
-                .ForMember(dest => dest.Username, opt =>
-                    opt.MapFrom(source => source.EmailOrUsername!.GetNormalized()))
-                .ForMember(dest => dest.Email, opt =>
-                    opt.MapFrom(source => source.EmailOrUsername!.GetNormalized()));
+                .ConvertUsing((src, _) =>
+                    new UserDto(src.EmailOrUsername!.GetNormalized(), src.EmailOrUsername!.GetNormalized(), null, false, null, DateTime.UtcNow));
 
             CreateMap<UserDto, UserViewModel>();
 
             CreateMap<AddEditProductViewModel, ProductDto>()
-                .ForMember(dest => dest.CreatedAt, opt =>
-                    opt.MapFrom(source => DateTime.UtcNow));
+                .ConvertUsing((src, _) =>
+              new ProductDto(src.Sku!, src.Name!, src.UnitPrice!.Value, src.StockQuantity!.Value, DateTime.UtcNow));
 
             CreateMap<ProductDto, ProductViewModel>();
 
@@ -42,11 +35,24 @@ namespace Presentation
             CreateMap(typeof(ListDtoResponse<>), typeof(ListViewModelResponse<>));
 
             CreateMap<AddEditOrderViewModel, OrderDto>()
-                .ForMember(dest => dest.CreatedAt, opt =>
-                    opt.MapFrom(source => DateTime.UtcNow));
+                .ConvertUsing((src, _) =>
+                {
+                    var items = new List<OrderItemDto>();
+                
+                    var order = new OrderDto(items,DateTime.UtcNow);
+
+                    foreach (var item in src.Items!)
+                    {
+                       items.Add(new OrderItemDto(item.ProductId!, item.UnitPrice!.Value, item.Quantity!.Value));
+                    }
+
+                    return order;
+                });
 
             CreateMap<AddEditOrderItemViewModel, OrderItemDto>();
+
             CreateMap<OrderDto, OrderViewModel>();
+
             CreateMap<OrderItemDto, OrderItemViewModel>();
         }
     }

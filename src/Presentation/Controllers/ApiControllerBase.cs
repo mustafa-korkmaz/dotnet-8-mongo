@@ -23,17 +23,5 @@ namespace Presentation.Controllers
 
             return userId;
         }
-
-        /// <summary>
-        /// returns user email from user principal claims.
-        /// If not exists returns null
-        /// </summary>
-        /// <returns></returns>
-        protected string GetUserEmail()
-        {
-            var userIdClaim = User.Claims.FirstOrDefault(p => p.Type == ClaimTypes.Email);
-
-            return userIdClaim!.Value;
-        }
     }
 }

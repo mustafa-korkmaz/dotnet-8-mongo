@@ -1,12 +1,7 @@
-﻿
-namespace Application.Dtos.Order
+﻿namespace Application.Dtos.Order
 {
-    public class OrderDto : DtoBase
+    public record OrderDto(ICollection<OrderItemDto> Items, DateTime CreatedAt) : DtoBase(CreatedAt)
     {
         public string UserId { get; set; } = null!;
-
-        public string? UserId1 { get; set; }
-
-        public ICollection<OrderItemDto> Items { get; set; } = null!;
     }
 }

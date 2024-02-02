@@ -10,11 +10,8 @@ namespace Infrastructure.Persistence.MongoDb
             BsonClassMap.RegisterClassMap<User>(map =>
             {
                 map.AutoMap();
-                map.MapProperty(x => x.Claims);
-                map.MapMember(x => x.Username).SetIsRequired(true);
-                map.MapMember(x => x.Email).SetIsRequired(true);
-                map.MapMember(x => x.PasswordHash).SetIsRequired(true);
-                map.MapMember(x => x.IsEmailConfirmed).SetIsRequired(true);
+                map.MapMember(user => user.NameSurname).SetIgnoreIfNull(true);
+                map.MapMember(user => user.Claims).SetIgnoreIfNull(true);
                 map.SetIgnoreExtraElements(true);
             });
         }

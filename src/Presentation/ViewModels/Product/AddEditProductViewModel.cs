@@ -21,6 +21,6 @@ namespace Presentation.ViewModels.Product
 
         [Required(ErrorMessage = ValidationErrorCode.RequiredField)]
         [Display(Name = "STOCK_QUANTITY")]
-        public decimal? StockQuantity { get; set; }
+        public int? StockQuantity { get; set; }
     }
 }

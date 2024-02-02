@@ -53,8 +53,6 @@ namespace Application.Services
             var document = Mapper.Map<TDto, TDocument>(dto);
             
             await Repository.InsertOneAsync(document);
-            
-            dto.Id = document.Id;
         }
 
         public virtual async Task UpdateAsync(TDto dto)

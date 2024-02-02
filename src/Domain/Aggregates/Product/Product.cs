@@ -10,13 +10,13 @@
 
         public int StockQuantity { get; private set; }
 
-        public Product(string id, string sku, string name, decimal unitPrice, int stockQuantity, DateTime createdAt) : base(id)
+        public Product(string id, string sku, string name, decimal unitPrice, int stockQuantity, DateTime createdAt) :
+            base(id, createdAt)
         {
             Sku = sku;
             Name = name;
             UnitPrice = unitPrice;
             StockQuantity = stockQuantity;
-            CreatedAt = createdAt;
         }
 
         public void RemoveStock(int quantity)

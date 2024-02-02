@@ -88,8 +88,6 @@ namespace Application.Services.Account
             user.SetPasswordHash(HashPassword(password));
 
             await Repository.InsertOneAsync(user);
-
-            userDto.Id = user.Id;
         }
 
         private string HashPassword(string password)
@@ -137,7 +135,7 @@ namespace Application.Services.Account
 
             var jwtClaims = new List<Claim>
             {
-                new(JwtRegisteredClaimNames.Sub, user.Id),
+                new(JwtRegisteredClaimNames.Sub, user.Id!),
                 new(JwtRegisteredClaimNames.Iat, EpochTime.GetIntDate(now).ToString(), ClaimValueTypes.Integer64),
                 new(JwtRegisteredClaimNames.Email, user.Email)
             };

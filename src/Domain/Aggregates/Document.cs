@@ -1,19 +1,20 @@
 ﻿namespace Domain.Aggregates
 {
-    public class Document : IDocument
+    public abstract class Document : IDocument
     {
-        public string Id { get; private set; }
-        public DateTime CreatedAt { get; protected set; }
+        public string Id { get; }
+        public DateTime CreatedAt { get; }
 
-        public Document(string id)
+        protected Document(string id, DateTime createdAt)
         {
             Id = id;
+            CreatedAt = createdAt;
         }
     }
 
     public interface IDocument
     {
-        public string Id { get; }
+        string Id { get; }
 
         DateTime CreatedAt { get; }
     }
