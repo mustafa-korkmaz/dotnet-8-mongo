@@ -21,8 +21,12 @@ namespace Application
                 {
                     src.Id ??= ObjectId.GenerateNewId().ToString();
 
-                    return new User(src.Id!, src.Username, src.Email, src.NameSurname, src.IsEmailConfirmed,
+                    var user = new User(src.Id!, src.Username, src.Email, src.IsEmailConfirmed,
                         src.CreatedAt);
+
+                    user.SetNameSurname(src.NameSurname);
+
+                    return user;
                 });
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDto, Product>()

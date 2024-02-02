@@ -17,27 +17,29 @@
         public IReadOnlyCollection<string>? Claims
         {
             get => _claims?.ToList();
-            private set => //todo : check if this is needed
-                _claims = value == null ? new List<string>() : value.ToList();
+            
+            // mongo deserialization requires a setter
+            private set => _claims = value == null ? new List<string>() : value.ToList();
         }
 
-        public User(string id, string username, string email, string? nameSurname, bool isEmailConfirmed,
+        public User(string id, string username, string email,bool isEmailConfirmed,
             DateTime createdAt) : base(id, createdAt)
         {
             Username = username;
             Email = email;
-            NameSurname = nameSurname;
             IsEmailConfirmed = isEmailConfirmed;
         }
 
         public void AddClaim(string claim)
         {
-            if (_claims == null)
-            {
-                _claims = new List<string>();
-            }
+            _claims ??= new List<string>();
 
             _claims.Add(claim);
+        }
+
+        public void SetNameSurname(string? nameSurname)
+        {
+            NameSurname = nameSurname;
         }
 
         public void SetPasswordHash(string passwordHash)
