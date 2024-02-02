@@ -19,7 +19,7 @@ namespace Presentation
         {
             CreateMap<AddUserViewModel, UserDto>()
                 .ConvertUsing((src, _) =>
-                    new UserDto(src.Email!.GetNormalized(), src.Email!.GetNormalized(), src.NameSurname!.GetNormalized(), false, null, DateTime.UtcNow));
+                    new UserDto(src.Email!.GetNormalized(), src.Email!.GetNormalized(), src.NameSurname, false, null, DateTime.UtcNow));
 
             CreateMap<GetTokenViewModel, UserDto>()
                 .ConvertUsing((src, _) =>
