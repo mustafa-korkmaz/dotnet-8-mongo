@@ -27,6 +27,7 @@ namespace Application
 
                     return user;
                 });
+
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDto, Product>()
                 .ConvertUsing((src, _) =>
