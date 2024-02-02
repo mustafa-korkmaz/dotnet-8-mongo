@@ -1,10 +1,8 @@
 ﻿namespace Application.Dtos
 {
-    public abstract record DtoBase
+    public abstract record DtoBase(DateTime CreatedAt)
     {
         public string? Id { get; set; }
-        
-        public DateTime CreatedAt { get; init; }
     }
 
     public readonly record struct ListDtoResponse<TDto>(IReadOnlyCollection<TDto> Items, long RecordsTotal)

@@ -19,24 +19,18 @@ namespace Application
             CreateMap<UserDto, User>()
                 .ConvertUsing((src, _) =>
                 {
-                    if (src.Id == null)
-                    {
-                        src.Id = ObjectId.GenerateNewId().ToString();
-                    }
+                    src.Id ??= ObjectId.GenerateNewId().ToString();
 
-                    return new User(src.Id, src.Username, src.Email, src.NameSurname, src.IsEmailConfirmed,
+                    return new User(src.Id!, src.Username, src.Email, src.NameSurname, src.IsEmailConfirmed,
                         src.CreatedAt);
                 });
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDto, Product>()
                 .ConvertUsing((src, _) =>
                 {
-                    if (src.Id == null)
-                    {
-                        src.Id = ObjectId.GenerateNewId().ToString();
-                    }
+                    src.Id ??= ObjectId.GenerateNewId().ToString();
 
-                    return new Product(src.Id, src.Sku, src.Name, src.UnitPrice, src.StockQuantity, src.CreatedAt);
+                    return new Product(src.Id!, src.Sku, src.Name, src.UnitPrice, src.StockQuantity, src.CreatedAt);
                 });
 
             CreateMap<OrderItem, OrderItemDto>();
@@ -44,12 +38,9 @@ namespace Application
             CreateMap<OrderDto, Order>()
                 .ConvertUsing((src, _) =>
                 {
-                    if (src.Id == null)
-                    {
-                        src.Id = ObjectId.GenerateNewId().ToString();
-                    }
+                    src.Id ??= ObjectId.GenerateNewId().ToString();
 
-                    var order = new Order(src.Id, src.UserId, src.CreatedAt);
+                    var order = new Order(src.Id!, src.UserId, src.CreatedAt);
 
                     foreach (var item in src.Items)
                     {
