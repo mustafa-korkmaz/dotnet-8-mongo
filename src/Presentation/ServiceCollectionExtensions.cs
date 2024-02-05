@@ -3,7 +3,6 @@ using Application.Services.Account;
 using Application.Services.Order;
 using Application.Services.Product;
 using Infrastructure.Configuration;
-using Infrastructure.Persistence.MongoDb;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
@@ -26,9 +25,6 @@ namespace Presentation
 
             //DTOs to Domain entities mappings
             services.AddAutoMapper(typeof(Application.ApplicationMappingProfile));
-
-            //Domain entities to mongoDb collections mappings
-            MongoDbPersistence.Configure();
         }
 
         public static void AddApplicationServices(this IServiceCollection services)

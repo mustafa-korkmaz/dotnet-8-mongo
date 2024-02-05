@@ -50,13 +50,15 @@ builder.Services.AddConfigSections(builder.Configuration);
 
 builder.Services.AddMappings();
 
-builder.Services.AddSingleton<IMongoClient>(s =>
+builder.Services.AddSingleton<IMongoClient>(_ =>
     new MongoClient(builder.Configuration["MongoDbConfig:ConnectionString"])
 );
 
 builder.Services.AddScoped<IMongoContext, MongoContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Configure MongoDB as a hosted service
+builder.Services.AddHostedService<MongoDbConfigService>();
 builder.Services.AddApplicationServices();
 
 builder.Services.AddCors(config =>
